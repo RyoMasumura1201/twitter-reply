@@ -1,13 +1,13 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../../styles/Home.module.css';
+import { Box } from '@chakra-ui/react';
 import { LoginButton } from '@/components/LoginButton';
 import { Layout } from '@/components/Layout';
 
 export default function Home() {
   return (
     <Layout>
-      <LoginButton />
+      <Box textAlign='center'>
+        <LoginButton />
+      </Box>
     </Layout>
   );
 }

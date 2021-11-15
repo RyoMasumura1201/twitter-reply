@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { LoginButton } from '@/components/LoginButton';
 import { Layout } from '@/components/Layout';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/client';
 
 export default function Home() {
   const [session, loading] = useSession();
@@ -15,7 +15,7 @@ export default function Home() {
           ) : (
             <>
               Not signed in <br />
-              <button onClick={() => signIn()}>Sign in</button>
+              <LoginButton />
             </>
           )}
         </>

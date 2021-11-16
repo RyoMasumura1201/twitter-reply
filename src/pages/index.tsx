@@ -26,11 +26,17 @@ export default function Home() {
         )}
       </Box>
       {session && (
-        <>
-          <Image src={session.user.image ?? ''} width='50px' height='50px' alt='userimage' />
-          {session.user.name} <br />
+        <Box textAlign='center'>
+          <Image
+            src={session.user.image ?? ''}
+            width='50px'
+            height='50px'
+            alt='userimage'
+            className='user-image'
+          />
+          <Text>{session.user.name}</Text>
           <LogoutButton />
-        </>
+        </Box>
       )}
     </Layout>
   );

@@ -1,4 +1,6 @@
 import { Box } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 import { LoginButton } from '@/components/LoginButton';
 import { Layout } from '@/components/Layout';
 import { useSession } from 'next-auth/client';
@@ -9,21 +11,22 @@ export default function Home() {
 
   return (
     <Layout>
-      {!session && (
-        <>
-          {loading ? (
-            <>Loading ...</>
-          ) : (
-            <>
-              Not signed in <br />
-              <LoginButton />
-            </>
-          )}
-        </>
-      )}
+      <Box textAlign='center'>
+        {!session && (
+          <>
+            <Text marginBottom='30'>あなたとユーザーとの会話を検索できます</Text>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <>
+                <LoginButton />
+              </>
+            )}
+          </>
+        )}
+      </Box>
       {session && (
         <>
-          Signed in as{' '}
           <Image src={session.user.image ?? ''} width='50px' height='50px' alt='userimage' />
           {session.user.name} <br />
           <LogoutButton />

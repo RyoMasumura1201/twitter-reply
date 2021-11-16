@@ -15,7 +15,7 @@ export const Layout: React.VFC<Props> = ({ children }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
-      <main style={{ marginTop: 10, marginBottom: 10 }}>{children}</main>
+      <main style={{ marginTop: 30, marginBottom: 30 }}>{children}</main>
       <Footer />
     </>
   );

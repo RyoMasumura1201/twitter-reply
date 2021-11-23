@@ -1,23 +1,18 @@
-import Twitter from 'twitter';
+import TwitterApi from 'twitter-api-v2';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const client = new Twitter({
-  consumer_key: process.env.TWITTER_CLIENT_ID,
-  consumer_secret: process.env.TWITTER_CLIENT_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+const client = new TwitterApi({
+  appKey: process.env.TWITTER_CLIENT_ID,
+  appSecret: process.env.TWITTER_CLIENT_SECRET,
+  accessToken: process.env.TWITTER_ACCESS_TOKEN,
+  accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
-export default function tweets(req: NextApiRequest, res: NextApiResponse) {
+export default async function tweets(req: NextApiRequest, res: NextApiResponse) {
   console.log('aaa');
 
-  const params = { screen_name: 'nodejs' };
-  client.get('statuses/user_timeline', params, function (error, tweets, response) {
-    if (!error) {
-      console.log(tweets.length);
-    } else {
-      console.log('だめ');
-    }
-  });
+  const data = await client.v2.followers('12');
 
-  return res.status(200).json(tweets.length);
+  console.log(data);
+
+  return res.status(200).json(data);
 }

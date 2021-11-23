@@ -7,9 +7,23 @@ import { Layout } from '@/components/Layout';
 import { useSession } from 'next-auth/client';
 import { LogoutButton } from '@/components/LogoutButton';
 import Image from 'next/image';
+import axios from 'axios';
 
 export default function Home() {
   const [session, loading] = useSession();
+
+  const handleOnChange = () => {
+    axios
+      .get('/api/tweets')
+      .then((res) => {
+        console.log('成功');
+        // console.log(res);
+      })
+      .catch((e) => {
+        console.log('失敗');
+        console.log(e);
+      });
+  };
 
   return (
     <Layout>
@@ -42,7 +56,12 @@ export default function Home() {
 
           <Box marginBottom='5'>
             <Text>会話したユーザーを検索</Text>
-            <Input placeholder='ユーザー名を入力してください' size='md' width='60%' />
+            <Input
+              placeholder='ユーザー名を入力してください'
+              size='md'
+              width='60%'
+              onChange={handleOnChange}
+            />
           </Box>
 
           <LogoutButton />

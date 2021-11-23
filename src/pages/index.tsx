@@ -7,6 +7,7 @@ import { Layout } from '@/components/Layout';
 import { useSession } from 'next-auth/client';
 import { LogoutButton } from '@/components/LogoutButton';
 import Image from 'next/image';
+
 export default function Home() {
   const [session, loading] = useSession();
 

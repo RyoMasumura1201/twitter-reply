@@ -8,9 +8,10 @@ import { useSession } from 'next-auth/client';
 import { LogoutButton } from '@/components/LogoutButton';
 import Image from 'next/image';
 import axios from 'axios';
+import { SessionWithUserId } from 'type';
 
 export default function Home() {
-  const [session, loading] = useSession();
+  const [session, loading]: [SessionWithUserId, boolean] = useSession();
 
   const handleOnClick = () => {
     axios
@@ -23,6 +24,7 @@ export default function Home() {
         console.log('失敗');
         console.log(e);
       });
+    console.log(session.user);
   };
 
   return (

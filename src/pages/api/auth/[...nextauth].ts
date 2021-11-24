@@ -1,6 +1,15 @@
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
+import { Session } from 'next-auth';
 
+interface SessionWithUserId extends Session {
+  user: {
+    id?: string;
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}
 export default NextAuth({
   providers: [
     Providers.Twitter({
@@ -23,9 +32,10 @@ export default NextAuth({
       }
       return token;
     },
-    async session(session, token) {
-      session.accessToken = token.accessToken;
-      return session;
+    async session(session: SessionWithUserId, user) {
+      session.accessToken = user.accessToken;
+      session.user.id = `${user.sub}`;
+      return Promise.resolve(session);
     },
   },
 });

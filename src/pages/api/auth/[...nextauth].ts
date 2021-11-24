@@ -1,15 +1,7 @@
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
-import { Session } from 'next-auth';
+import { SessionWithUserId } from 'type';
 
-interface SessionWithUserId extends Session {
-  user: {
-    id?: string;
-    name?: string;
-    email?: string;
-    image?: string;
-  };
-}
 export default NextAuth({
   providers: [
     Providers.Twitter({

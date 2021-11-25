@@ -9,19 +9,24 @@ import { LogoutButton } from '@/components/LogoutButton';
 import Image from 'next/image';
 import axios from 'axios';
 import { SessionWithUserId } from 'type';
+import React, { useState } from 'react';
 
 export default function Home() {
   const [session, loading]: [SessionWithUserId, boolean] = useSession();
+  const [userName, setUserName] = useState<string>();
+
+  const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value);
+    console.log(userName);
+  };
 
   const handleOnClick = () => {
     axios
-      .get(`/api/twitter/follower/${session.user.id}`)
+      .get(`/api/twitter/users/${userName}`)
       .then((res) => {
         console.log('成功');
-        // console.log(res);
       })
       .catch((e) => {
-        console.log('失敗');
         console.log(e);
       });
   };
@@ -56,8 +61,14 @@ export default function Home() {
           </Box>
 
           <Box marginBottom='5'>
-            <Text>会話したユーザーを検索</Text>
-            <Input placeholder='ユーザー名を入力してください' size='md' width='60%' />
+            <Text>ユーザーを検索</Text>
+            <Input
+              placeholder='ユーザー名を入力してください'
+              size='md'
+              width='60%'
+              value={userName}
+              onChange={handleUserName}
+            />
             <Button onClick={handleOnClick} ml={5} colorScheme='teal' size='md'>
               検索
             </Button>

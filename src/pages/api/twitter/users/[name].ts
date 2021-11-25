@@ -7,12 +7,12 @@ const client = new TwitterApi({
   accessToken: process.env.TWITTER_ACCESS_TOKEN,
   accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
-export default async function fetchFollowers(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
+export default async function fetchUsersByName(req: NextApiRequest, res: NextApiResponse) {
+  const { name } = req.query;
 
-  const data = await client.v2.followers(String(id));
+  const users = await client.v2.usersByUsernames([String(name)]);
 
-  console.log(data);
+  console.log(users);
 
-  return res.status(200).json([data]);
+  return res.status(200).json([users]);
 }

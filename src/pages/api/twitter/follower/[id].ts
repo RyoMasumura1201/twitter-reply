@@ -8,11 +8,11 @@ const client = new TwitterApi({
   accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 export default async function tweets(req: NextApiRequest, res: NextApiResponse) {
-  console.log('aaa');
+  const { id } = req.query;
 
-  const data = await client.v2.followers('12');
+  const data = await client.v2.followers(String(id));
 
   console.log(data);
 
-  return res.status(200).json(data);
+  return res.status(200).json([data]);
 }

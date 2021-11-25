@@ -15,7 +15,7 @@ export default function Home() {
 
   const handleOnClick = () => {
     axios
-      .get('/api/tweets')
+      .get(`/api/twitter/follower/${session.user.id}`)
       .then((res) => {
         console.log('成功');
         // console.log(res);
@@ -24,7 +24,6 @@ export default function Home() {
         console.log('失敗');
         console.log(e);
       });
-    console.log(session.user);
   };
 
   return (

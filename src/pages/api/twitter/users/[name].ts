@@ -12,8 +12,6 @@ export default async function fetchUsersByName(req: NextApiRequest, res: NextApi
 
   const user = await client.v2.usersByUsernames([String(name)]);
 
-  console.log(user);
-
   if (!user.errors) {
     return res.status(200).json([user]);
   } else {

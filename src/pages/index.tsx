@@ -8,13 +8,14 @@ import { useSession } from 'next-auth/client';
 import { LogoutButton } from '@/components/LogoutButton';
 import Image from 'next/image';
 import axios from 'axios';
-import { SessionWithUserId } from 'type';
+import { SessionWithUserId, User } from 'type';
 import React, { useState } from 'react';
 
 export default function Home() {
   const [session, loading]: [SessionWithUserId, boolean] = useSession();
   const [userName, setUserName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [conversationPartner, setConversationPartner] = useState<User[]>([]);
 
   const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
@@ -25,8 +26,10 @@ export default function Home() {
     axios
       .get(`/api/twitter/users/${userName}`)
       .then((res) => {
+        setConversationPartner([...conversationPartner, res.data[0].data[0]]);
         setErrorMessage('');
         console.log('成功');
+        console.log(conversationPartner);
       })
       .catch((e) => {
         setErrorMessage('指定のユーザーは見つかりませんでした');

@@ -8,3 +8,10 @@ export interface SessionWithUserId extends Session {
     image?: string;
   };
 }
+
+export interface User {
+  id: string;
+  name: string;
+  username;
+  string;
+}

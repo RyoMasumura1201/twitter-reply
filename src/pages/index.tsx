@@ -27,12 +27,13 @@ export default function Home() {
     axios
       .get(`/api/twitter/users/${userName}`)
       .then((res) => {
-        setConversationPartner([...conversationPartner, res.data[0].data[0]]);
+        setConversationPartner(res.data[0].data);
         setErrorMessage('');
         console.log('成功');
         console.log(conversationPartner);
       })
       .catch((e) => {
+        setConversationPartner([]);
         setErrorMessage('指定のユーザーは見つかりませんでした');
         console.log(e);
       });

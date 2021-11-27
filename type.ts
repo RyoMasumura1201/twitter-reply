@@ -12,6 +12,5 @@ export interface SessionWithUserId extends Session {
 export interface User {
   id: string;
   name: string;
-  username;
-  string;
+  username: string;
 }

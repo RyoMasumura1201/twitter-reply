@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, VStack, Center } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
@@ -10,6 +10,7 @@ import Image from 'next/image';
 import axios from 'axios';
 import { SessionWithUserId, User } from 'type';
 import React, { useState } from 'react';
+import UserCard from '@/components/UserCard';
 
 export default function Home() {
   const [session, loading]: [SessionWithUserId, boolean] = useSession();
@@ -79,6 +80,16 @@ export default function Home() {
               検索
             </Button>
             <Text color='red.400'>{errorMessage}</Text>
+
+            <Box mt='5'>
+              <Center>
+                <VStack>
+                  {conversationPartner.map(({ id, name, username }) => (
+                    <UserCard name={name} username={username} id={id} key={id} />
+                  ))}
+                </VStack>
+              </Center>
+            </Box>
           </Box>
 
           <LogoutButton />

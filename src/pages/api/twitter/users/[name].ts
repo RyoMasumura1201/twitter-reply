@@ -17,7 +17,6 @@ export default async function fetchUsersByName(req: NextApiRequest, res: NextApi
   if (!user.errors) {
     return res.status(200).json([user]);
   } else {
-    console.log('失敗しました');
-    return res.status(500).json({ error: 'failed to load data' });
+    return res.status(500).json({ error: '指定のユーザーは見つかりませんでした' });
   }
 }

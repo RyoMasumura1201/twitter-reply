@@ -13,7 +13,8 @@ import React, { useState } from 'react';
 
 export default function Home() {
   const [session, loading]: [SessionWithUserId, boolean] = useSession();
-  const [userName, setUserName] = useState<string>();
+  const [userName, setUserName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
@@ -24,9 +25,11 @@ export default function Home() {
     axios
       .get(`/api/twitter/users/${userName}`)
       .then((res) => {
+        setErrorMessage('');
         console.log('成功');
       })
       .catch((e) => {
+        setErrorMessage('指定のユーザーは見つかりませんでした');
         console.log(e);
       });
   };
@@ -72,6 +75,7 @@ export default function Home() {
             <Button onClick={handleOnClick} ml={5} colorScheme='teal' size='md'>
               検索
             </Button>
+            <Text color='red.400'>{errorMessage}</Text>
           </Box>
 
           <LogoutButton />

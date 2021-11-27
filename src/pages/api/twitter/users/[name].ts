@@ -10,9 +10,14 @@ const client = new TwitterApi({
 export default async function fetchUsersByName(req: NextApiRequest, res: NextApiResponse) {
   const { name } = req.query;
 
-  const users = await client.v2.usersByUsernames([String(name)]);
+  const user = await client.v2.usersByUsernames([String(name)]);
 
-  console.log(users);
+  console.log(user);
 
-  return res.status(200).json([users]);
+  if (!user.errors) {
+    return res.status(200).json([user]);
+  } else {
+    console.log('失敗しました');
+    return res.status(500).json({ error: 'failed to load data' });
+  }
 }

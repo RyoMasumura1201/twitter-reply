@@ -84,8 +84,14 @@ export default function Home() {
             <Box mt='5'>
               <Center>
                 <VStack>
-                  {conversationPartner.map(({ id, name, username }) => (
-                    <UserCard name={name} username={username} id={id} key={id} />
+                  {conversationPartner.map(({ id, name, username, profile_image_url }) => (
+                    <UserCard
+                      name={name}
+                      username={username}
+                      id={id}
+                      key={id}
+                      profile_image_url={profile_image_url}
+                    />
                   ))}
                 </VStack>
               </Center>

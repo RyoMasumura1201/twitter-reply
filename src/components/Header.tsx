@@ -4,7 +4,7 @@ export const Header: React.VFC = () => {
   return (
     <header style={{ textAlign: 'center' }}>
       <Text fontSize='xx-large' fontWeight='bold'>
-        reply-collection
+        like-collection
       </Text>
     </header>
   );

@@ -3,7 +3,7 @@ import { Text } from '@chakra-ui/react';
 import { memo } from 'react';
 import { User } from 'type';
 import axios from 'axios';
-const UserCard: React.VFC<User> = (props) => {
+const UserCard: React.VFC<Readonly<User>> = (props) => {
   const { id, name, username } = props;
   const handleSearchTweets = () => {
     axios

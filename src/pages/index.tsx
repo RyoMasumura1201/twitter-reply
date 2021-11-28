@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import UserCard from '@/components/UserCard';
 
 export default function Home() {
-  const [session, loading]: [SessionWithUserId, boolean] = useSession();
+  const [session, loading]: [Readonly<SessionWithUserId>, boolean] = useSession();
   const [userName, setUserName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [conversationPartner, setConversationPartner] = useState<User[]>([]);

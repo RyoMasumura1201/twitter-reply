@@ -10,8 +10,11 @@ const client = new TwitterApi({
 export default async function fetchUsersByName(req: NextApiRequest, res: NextApiResponse) {
   const { name } = req.query;
 
-  const user = await client.v2.usersByUsernames([String(name)]);
+  const user = await client.v2.usersByUsernames([String(name)], {
+    'user.fields': 'profile_image_url',
+  });
 
+  console.log(user);
   if (!user.errors) {
     return res.status(200).json([user]);
   } else {

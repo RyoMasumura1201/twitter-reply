@@ -10,9 +10,12 @@ const client = new TwitterApi({
 export default async function fetchLikes(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
 
-  const likedTweets = await client.v2.userLikedTweets(String(id));
+  const likedTweets = await client.v2.userLikedTweets(String(id), {
+    expansions: ['author_id'],
+    'tweet.fields': ['created_at', 'entities'],
+  });
 
-  console.log(likedTweets.tweets);
+  console.log(likedTweets.data);
 
   return res.status(200).json([likedTweets]);
 }

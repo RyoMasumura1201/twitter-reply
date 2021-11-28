@@ -18,7 +18,12 @@ const UserCard: React.VFC<Readonly<User>> = (props) => {
       });
   };
   return (
-    <HStack>
+    <HStack
+      onClick={handleSearchTweets}
+      style={{ cursor: 'pointer' }}
+      className='hover'
+      spacing='5'
+    >
       <Image
         src={profile_image_url}
         width='50px'
@@ -26,12 +31,7 @@ const UserCard: React.VFC<Readonly<User>> = (props) => {
         alt='userimage'
         className='user-image'
       />
-      <VStack
-        spacing='0.5'
-        onClick={handleSearchTweets}
-        style={{ cursor: 'pointer' }}
-        className='hover'
-      >
+      <VStack spacing='0.5'>
         <Text fontWeight='medium' fontSize='large'>
           {name}
         </Text>

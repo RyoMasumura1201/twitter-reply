@@ -20,7 +20,6 @@ export default function Home() {
 
   const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
-    console.log(userName);
   };
 
   const handleOnClick = () => {

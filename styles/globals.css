@@ -28,3 +28,7 @@ footer {
 .user-image {
   border-radius: 50%;
 }
+
+.hover:hover {
+  opacity: 0.6;
+}

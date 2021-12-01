@@ -15,7 +15,8 @@ export default async function fetchLikes(req: NextApiRequest, res: NextApiRespon
     'tweet.fields': ['created_at', 'entities'],
   });
 
-  console.log(likedTweets.data);
+  await likedTweets.fetchLast();
+  console.log(likedTweets.data.data.length);
 
   return res.status(200).json([likedTweets]);
 }

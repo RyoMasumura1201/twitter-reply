@@ -16,7 +16,14 @@ export default async function fetchLikes(req: NextApiRequest, res: NextApiRespon
   });
 
   await likedTweets.fetchLast();
-  console.log(likedTweets.data.data.length);
 
-  return res.status(200).json([likedTweets]);
+  const sortedLikedTweets = likedTweets.data.data.sort((a, b) => {
+    if (a.created_at < b.created_at) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
+  return res.status(200).json([sortedLikedTweets]);
 }

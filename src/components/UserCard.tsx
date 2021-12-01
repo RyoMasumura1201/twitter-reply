@@ -1,12 +1,14 @@
 import { VStack, HStack } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/react';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { User } from 'type';
 import axios from 'axios';
 import Image from 'next/image';
 const UserCard: React.VFC<Readonly<User>> = (props) => {
   const { id, name, username, profile_image_url } = props;
+  const [isLoading, setIsLoading] = useState(false);
   const handleSearchTweets = () => {
+    setIsLoading(true);
     axios
       .get(`/api/twitter/likedTweets/${id}`)
       .then((res) => {
@@ -15,6 +17,9 @@ const UserCard: React.VFC<Readonly<User>> = (props) => {
       .catch((e) => {
         console.log('失敗した');
         console.log(e);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   return (
